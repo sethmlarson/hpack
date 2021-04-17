@@ -5,7 +5,7 @@ import os
 import re
 import sys
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages  # type: ignore[import]
 
 PROJECT_ROOT = os.path.dirname(__file__)
 
@@ -55,4 +55,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
     ],
+    extras_require={
+        "mypy": ["mypy>=0.812"]
+    },
 )

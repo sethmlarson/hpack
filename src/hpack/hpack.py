@@ -69,9 +69,12 @@ def _unicode_if_needed(
     name = bytes(header[0])
     value = bytes(header[1])
     if raw:
-        return header.__class__(name, value)  # type: ignore
+        return header.__class__(  # type: ignore[no-any-return, misc]
+            name,
+            value,
+        )
     else:
-        return header.__class__(  # type: ignore
+        return header.__class__(  # type: ignore[no-any-return, misc]
             name.decode('utf-8'),
             value.decode('utf-8')
         )
@@ -287,7 +290,7 @@ class Encoder:
             if isinstance(header, HeaderTuple):
                 sensitive = not header.indexable
             elif len(header) > 2:
-                sensitive = header[2]  # type: ignore
+                sensitive = header[2]  # type: ignore[misc]
 
             header = (_to_bytes(header[0]), _to_bytes(header[1]))
             header_block.append(self.add(header, sensitive, huffman))
@@ -585,8 +588,9 @@ class Decoder:
         self._assert_valid_table_size()
 
         try:
-            return [
-                _unicode_if_needed(h, raw) for h in headers  # type: ignore
+            return [  # type: ignore[return-value]
+                _unicode_if_needed(h, raw)  # type: ignore[arg-type]
+                for h in headers
             ]
         except UnicodeDecodeError:
             raise HPACKDecodingError("Unable to decode headers as UTF-8.")
