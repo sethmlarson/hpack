@@ -3,8 +3,8 @@ import json
 import os
 
 from binascii import hexlify
-from invoke import task
-from hyper.http20.hpack import Encoder
+from invoke import task  # type: ignore[import]
+from hyper.http20.hpack import Encoder  # type: ignore[import]
 
 
 @task

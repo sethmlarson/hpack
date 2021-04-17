@@ -9,7 +9,7 @@ Contains structures for representing header fields with associated metadata.
 from typing import Any
 
 
-class HeaderTuple(tuple):  # type: ignore
+class HeaderTuple(tuple):  # type: ignore[type-arg]
     """
     A data structure that stores a single header field.
 

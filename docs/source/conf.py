@@ -14,6 +14,8 @@ import os
 import sys
 import re
 
+from typing import List
+
 sys.path.insert(0, os.path.abspath('../..'))
 
 PROJECT_ROOT = os.path.dirname(__file__)
@@ -22,6 +24,7 @@ version_regex = r'__version__ = ["\']([^"\']*)["\']'
 with open(os.path.join(PROJECT_ROOT, '../../', 'src/hpack/__init__.py')) as file_:
     text = file_.read()
     match = re.search(version_regex, text)
+    assert match
     version = match.group(1)
 
 
@@ -49,7 +52,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns: List[str] = []
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
